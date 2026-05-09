@@ -1,0 +1,13 @@
+data/raw/retail_churn.csv
+data/interim/
+data/processed/
+models/
+mlruns/
+__pycache__/
+venv/
+.env
+mlruns/
+models/*.pkl
+reports/model_metrics/
+reports/classification_reports/
+reports/figures/confusion_matrices/

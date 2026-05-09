@@ -1,0 +1,5 @@
+outs:
+- md5: 80faaab4f7a7c1c8ac1906d96955368e
+  size: 9357687
+  hash: md5
+  path: retail_churn.csv
