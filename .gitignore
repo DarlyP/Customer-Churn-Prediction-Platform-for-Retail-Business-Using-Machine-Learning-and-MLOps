@@ -1,7 +1,7 @@
 data/raw/retail_churn.csv
 data/interim/
 data/processed/
-models/
+models/best_model.pkl
 mlruns/
 __pycache__/
 venv/
