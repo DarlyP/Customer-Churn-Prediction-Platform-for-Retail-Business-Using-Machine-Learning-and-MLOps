@@ -1,0 +1,194 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python -m src.data.load_data
+    deps:
+    - path: data/raw/retail_churn.csv
+      hash: md5
+      md5: 80faaab4f7a7c1c8ac1906d96955368e
+      size: 9357687
+    - path: src/data/load_data.py
+      hash: md5
+      md5: b2169436b6092ddae6e87c50915fc002
+      size: 1878
+    outs:
+    - path: data/interim/cleaned_raw.csv
+      hash: md5
+      md5: 94dbdb389cba80842c6c3cac762446a9
+      size: 9457688
+  validate_data:
+    cmd: python -m src.data.validate_data
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 89ce57a127690db5cdfe845ef43389c8
+      size: 630
+    - path: data/interim/cleaned_raw.csv
+      hash: md5
+      md5: 94dbdb389cba80842c6c3cac762446a9
+      size: 9457688
+    - path: src/data/validate_data.py
+      hash: md5
+      md5: f95d17def70dfa4fe759d59097f28565
+      size: 11402
+    - path: src/utils/config.py
+      hash: md5
+      md5: e0d930b4f98035952c14f94011ad5bf4
+      size: 443
+    outs:
+    - path: reports/data_validation_report.html
+      hash: md5
+      md5: 1340443f6928aad6d1d81d8b108db9a9
+      size: 5884
+  build_features:
+    cmd: python -m src.features.build_features
+    deps:
+    - path: data/interim/cleaned_raw.csv
+      hash: md5
+      md5: 94dbdb389cba80842c6c3cac762446a9
+      size: 9457688
+    - path: src/features/build_features.py
+      hash: md5
+      md5: 213488fa683d1dbb2c0a9fcb4aa1efb4
+      size: 21634
+    outs:
+    - path: data/processed/feature_list.json
+      hash: md5
+      md5: 1dd91eadbfcc9f68b5ad7eafc1a5fef4
+      size: 6027
+    - path: data/processed/processed_churn.csv
+      hash: md5
+      md5: 27b7a91ad0dcf9084f52fd976aca2b84
+      size: 54341555
+    - path: data/processed/test.csv
+      hash: md5
+      md5: cffc67eecdf96f3db6549f80e6387502
+      size: 24905221
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 730f0eca3745b3a3b57850a35beaabbc
+      size: 99617118
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: abababb8e1bd34895a9eedbb5fb792bc
+      size: 9797
+  train_model:
+    cmd: python -m src.models.train_with_mlflow
+    deps:
+    - path: data/processed/feature_list.json
+      hash: md5
+      md5: 1dd91eadbfcc9f68b5ad7eafc1a5fef4
+      size: 6027
+    - path: data/processed/test.csv
+      hash: md5
+      md5: cffc67eecdf96f3db6549f80e6387502
+      size: 24905221
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 730f0eca3745b3a3b57850a35beaabbc
+      size: 99617118
+    - path: src/models/train_with_mlflow.py
+      hash: md5
+      md5: 045dd0df0c399660921c5f87c2f8ab3e
+      size: 11209
+    outs:
+    - path: models/champion_model.pkl
+      hash: md5
+      md5: 334c4789699a8cc81b35a0355d5d2ae8
+      size: 1057300
+    - path: reports/model_metrics/champion_model_metrics.json
+      hash: md5
+      md5: cffdff5c2cb10e4d09f4ce9a42fce506
+      size: 361
+    - path: reports/model_metrics/mlflow_model_comparison.csv
+      hash: md5
+      md5: c06a5783b66d9e88ba0da2826182f4be
+      size: 666
+  tune_model:
+    cmd: python -m src.models.tune_model
+    deps:
+    - path: data/processed/feature_list.json
+      hash: md5
+      md5: 1dd91eadbfcc9f68b5ad7eafc1a5fef4
+      size: 6027
+    - path: data/processed/test.csv
+      hash: md5
+      md5: cffc67eecdf96f3db6549f80e6387502
+      size: 24905221
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 730f0eca3745b3a3b57850a35beaabbc
+      size: 99617118
+    - path: src/models/tune_model.py
+      hash: md5
+      md5: 6cb879053438bda2ef114ef255cf4e86
+      size: 19068
+    outs:
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 6b43fd47a73f93a995a87dd27cc02d52
+      size: 470452
+    - path: models/tuned_model.pkl
+      hash: md5
+      md5: 6b43fd47a73f93a995a87dd27cc02d52
+      size: 470452
+    - path: reports/model_metrics/best_params.json
+      hash: md5
+      md5: 56c48d356b814f1b41d6e4bf4b46433f
+      size: 460
+    - path: reports/model_metrics/best_tuned_model_metrics.json
+      hash: md5
+      md5: 4f3fd16ab8a18d15b1b78dc2272edf72
+      size: 503
+    - path: reports/model_metrics/tuning_comparison.csv
+      hash: md5
+      md5: 6ee114dfd9ec170a54c0ec3fd692f30e
+      size: 437
+  evaluate_model:
+    cmd: python -m src.models.evaluate_model
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: cffc67eecdf96f3db6549f80e6387502
+      size: 24905221
+    - path: models/best_model.pkl
+      hash: md5
+      md5: 6b43fd47a73f93a995a87dd27cc02d52
+      size: 470452
+    - path: src/models/evaluate_model.py
+      hash: md5
+      md5: 5fe748ee858887f2d8d1df63097d09a3
+      size: 14369
+    outs:
+    - path: reports/final_evaluation/final_business_interpretation.md
+      hash: md5
+      md5: bf4367f56b1f649cbae55a72af38ee01
+      size: 2412
+    - path: reports/final_evaluation/final_classification_report.txt
+      hash: md5
+      md5: ae86a9fa532d9d249797c842edaea44e
+      size: 334
+    - path: reports/final_evaluation/final_confusion_matrix.png
+      hash: md5
+      md5: 5b392ca6abd4dbd71d0062267a08daa8
+      size: 64059
+    - path: reports/final_evaluation/final_feature_importance.csv
+      hash: md5
+      md5: 73cd1bdef1b2ae3d22610b3c99440795
+      size: 2559
+    - path: reports/final_evaluation/final_feature_importance.png
+      hash: md5
+      md5: 5cfe77355c7f250ed685b323640b9186
+      size: 253243
+    - path: reports/final_evaluation/final_metrics.json
+      hash: md5
+      md5: f82511580f5f8115feba812e2941e657
+      size: 622
+    - path: reports/final_evaluation/final_precision_recall_curve.png
+      hash: md5
+      md5: 17b24f672b65e0d4d3e3a4eaf1813798
+      size: 82154
+    - path: reports/final_evaluation/final_roc_curve.png
+      hash: md5
+      md5: 323b134b487d8f40f48bbe4d0e18fccb
+      size: 86969

@@ -11,3 +11,9 @@ models/*.pkl
 reports/model_metrics/
 reports/classification_reports/
 reports/figures/confusion_matrices/
+notepad .gitignore
+mlflow.db
+mlruns/
+data/predictions/
+reports/figures/
+reports/shap/

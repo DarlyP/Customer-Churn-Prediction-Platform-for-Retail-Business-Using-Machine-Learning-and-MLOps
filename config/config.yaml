@@ -1,0 +1,30 @@
+data:
+  raw_path: data/raw/retail_churn.csv
+  interim_path: data/interim/cleaned_raw.csv
+  processed_path: data/processed/processed_churn.csv
+  train_path: data/processed/train.csv
+  test_path: data/processed/test.csv
+
+model:
+  target: churn
+  test_size: 0.2
+  random_state: 42
+  model_output_path: models/churn_model.pkl
+
+mlflow:
+  experiment_name: retail_churn_prediction
+
+validation:
+  report_path: reports/data_validation_report.html
+
+  required_columns:
+    - customer_id
+    - churn_flag
+
+  id_column: customer_id
+
+  non_negative_columns: []
+
+  categorical_columns: {}
+
+  max_missing_ratio: 0.30

@@ -1,0 +1,72 @@
+stages:
+  load_data:
+    cmd: python -m src.data.load_data
+    deps:
+      - data/raw/retail_churn.csv
+      - src/data/load_data.py
+    outs:
+      - data/interim/cleaned_raw.csv
+
+  validate_data:
+    cmd: python -m src.data.validate_data
+    deps:
+      - data/interim/cleaned_raw.csv
+      - src/data/validate_data.py
+      - src/utils/config.py
+      - config/config.yaml
+    outs:
+      - reports/data_validation_report.html
+
+  build_features:
+    cmd: python -m src.features.build_features
+    deps:
+      - data/interim/cleaned_raw.csv
+      - src/features/build_features.py
+    outs:
+      - data/processed/processed_churn.csv
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - data/processed/feature_list.json
+      - models/preprocessor.pkl
+
+  train_model:
+    cmd: python -m src.models.train_with_mlflow
+    deps:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - data/processed/feature_list.json
+      - src/models/train_with_mlflow.py
+    outs:
+      - models/champion_model.pkl
+      - reports/model_metrics/mlflow_model_comparison.csv
+      - reports/model_metrics/champion_model_metrics.json
+
+  tune_model:
+    cmd: python -m src.models.tune_model
+    deps:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - data/processed/feature_list.json
+      - src/models/tune_model.py
+    outs:
+      - models/best_model.pkl
+      - models/tuned_model.pkl
+      - reports/model_metrics/best_params.json
+      - reports/model_metrics/best_tuned_model_metrics.json
+      - reports/model_metrics/tuning_comparison.csv
+
+  evaluate_model:
+    cmd: python -m src.models.evaluate_model
+    deps:
+      - data/processed/test.csv
+      - models/best_model.pkl
+      - src/models/evaluate_model.py
+    outs:
+      - reports/final_evaluation/final_metrics.json
+      - reports/final_evaluation/final_classification_report.txt
+      - reports/final_evaluation/final_confusion_matrix.png
+      - reports/final_evaluation/final_roc_curve.png
+      - reports/final_evaluation/final_precision_recall_curve.png
+      - reports/final_evaluation/final_feature_importance.csv
+      - reports/final_evaluation/final_feature_importance.png
+      - reports/final_evaluation/final_business_interpretation.md
