@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import pandas as pd
 import pytest
 
 from src.models.predict_model import predict_customer_churn

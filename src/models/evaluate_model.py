@@ -395,7 +395,6 @@ def main() -> None:
 
     model = load_model()
     X_test, y_test = load_test_data()
-    feature_metadata = load_feature_metadata()
 
     print(f"Loaded model from: {MODEL_PATH}")
     print(f"X_test shape: {X_test.shape}")
