@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="images/customer-churn-wallpaper.jpeg" alt="Customer Churn" width="100%"/>
+
+<br/><br/>
+
 # 🛒 Retail Customer Churn Prediction Platform
 
 ### End-to-End Machine Learning & MLOps System for Proactive Customer Retention
@@ -20,7 +24,7 @@
 
 <br/>
 
-[📖 Overview](#-overview) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🚀 Quick Start](#-quick-start) · [🖥️ Demo](#️-live-services) · [🗂️ Project Structure](#️-project-structure)
+[📖 Overview](#-overview) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🖥️ Screenshots](#️-screenshots) · [🚀 Quick Start](#-quick-start) · [🗂️ Project Structure](#️-project-structure)
 
 </div>
 
@@ -115,6 +119,7 @@ The champion model (Tuned LightGBM) was selected based on **churn-specific busin
 | ![SHAP Global](docs/assets/shap_global_feature_importance.png) | ![SHAP Summary](docs/assets/shap_summary_plot.png) |
 
 **Waterfall Plot — High-Risk Customer Example**
+
 ![SHAP Waterfall](docs/assets/shap_waterfall_high_risk_customer.png)
 
 </details>
@@ -173,6 +178,64 @@ Every customer receives a churn probability score mapped to a risk tier with an 
 
 ---
 
+## 🖥️ Screenshots
+
+### 📊 Streamlit Business Dashboard
+
+> A full-featured business dashboard with 5 interactive pages — built for analysts and business stakeholders to explore churn patterns, run predictions, and track model health — all without writing a single line of code.
+
+<br/>
+
+**1. Executive Summary** — High-level churn KPIs at a glance: total customers, churn rate, high/critical risk counts, and revenue at risk.
+
+![Executive Summary Dashboard](images/Dashboard_1.jpg)
+
+<br/>
+
+**2. Customer Segmentation** — Churn rate breakdown by customer segment (Loyal, New, Returning, VIP) with behavioral analysis.
+
+![Customer Segmentation Dashboard](images/Dashboard_2.jpg)
+
+<br/>
+
+**3. Prediction App** — Fill in a customer profile interactively and instantly receive a churn probability score with the recommended retention action.
+
+![Prediction App Dashboard](images/Dashboard_3.jpg)
+
+<br/>
+
+**4. Monitoring** — Evidently AI drift report embedded directly in the dashboard. Current status: dataset drift NOT detected (6.97% of columns drifted).
+
+![Monitoring Dashboard](images/Dashboard_4.jpg)
+
+---
+
+### ⚡ FastAPI — REST API with Interactive Docs
+
+> Production-ready REST API with auto-generated Swagger UI. Supports both single-customer and batch predictions, with full request/response schema validation via Pydantic.
+
+![FastAPI Swagger UI](images/FastAPI.jpg)
+
+---
+
+### 🧪 MLflow — Experiment Tracking & Model Comparison
+
+> All training runs are automatically logged to MLflow — making it easy to compare models, audit decisions, and promote the best-performing model to production.
+
+<br/>
+
+**Experiment Runs** — 12 runs across 6 model types, all tracked with hyperparameters, metrics, and model artifacts.
+
+![MLflow Experiment Runs](images/MLOps_1.jpg)
+
+<br/>
+
+**Parallel Coordinates Plot** — Visually compare hyperparameter combinations vs. accuracy across all runs to identify the optimal configuration.
+
+![MLflow Model Comparison](images/MLOps_2.jpg)
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Tools |
@@ -203,6 +266,8 @@ Every customer receives a churn probability score mapped to a risk tier with an 
 │
 ├── dashboard/
 │   └── app.py                  # Streamlit business dashboard (5 pages)
+│
+├── images/                     # Screenshots for README
 │
 ├── src/
 │   ├── data/
@@ -283,8 +348,8 @@ dvc repro
 pytest -v
 
 # 6. Start services
-uvicorn api.main:app --reload      # API   → localhost:8000/docs
-streamlit run dashboard/app.py     # UI    → localhost:8501
+uvicorn api.main:app --reload      # API    → localhost:8000/docs
+streamlit run dashboard/app.py     # UI     → localhost:8501
 mlflow ui                          # MLflow → localhost:5000
 ```
 
@@ -311,7 +376,7 @@ Every training run logs:
 - Confusion matrix and classification report
 - Feature list and model artifact
 
-This makes it straightforward to compare baseline vs. tuned models and promote the champion to production.
+12 runs across 6 model types are tracked and compared. The parallel coordinates plot makes it easy to see which hyperparameter combinations drive the best accuracy.
 
 ```bash
 mlflow ui  # → http://localhost:5000
@@ -336,6 +401,8 @@ Pipeline stages: `validate_data` → `build_features` → `train_baseline` → `
 <summary><b>📡 Drift Monitoring — Evidently AI</b></summary>
 
 Simulates production monitoring by comparing training (reference) data against new monthly customer data. Detects data drift, feature drift, prediction drift, and missing value changes before they silently degrade model performance.
+
+Current monitoring result: **Dataset drift NOT detected** — only 6 out of 86 columns drifted (6.97%), well below the 0.5 threshold.
 
 ```bash
 python -m src.monitoring.drift_report
@@ -405,19 +472,11 @@ Based on the model and SHAP analysis, the top signals driving churn are **custom
 
 ---
 
-## 👤 Author
-
-**Darly P**
-
-[![GitHub](https://img.shields.io/badge/GitHub-DarlyP-181717?style=flat-square&logo=github)](https://github.com/DarlyP)
-
----
-
-<div align="center">
-
-*Built as a portfolio project demonstrating production-grade ML engineering practices.*
-*Feedback, questions, and contributions are welcome.*
+**Disclaimer**: 
+- This notebook is created solely for learning and exploration purposes. There is no intention to offend or harm any party. All content and analysis presented are based on publicly available data online. I undertake this process to enhance my understanding of data analysis techniques and methodologies and hone my skills in implementing relevant algorithms and models within the context of data science learning. In conducting this analysis, I strive to maintain objectivity and professionalism in interpreting the existing data. Any conclusions or recommendations provided result from personal analysis and are not intended as professional advice in any specific capacity. I hope the information obtained from this notebook can be useful to anyone reading it to learn and develop data analysis skills.
 
 ⭐ **If this project was helpful, consider giving it a star!** ⭐
+
+---
 
 </div>
