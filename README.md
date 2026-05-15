@@ -24,7 +24,7 @@
 
 <br/>
 
-[📖 Overview](#-overview) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🖥️ Screenshots](#️-screenshots) · [🚀 Quick Start](#-quick-start) · [🗂️ Project Structure](#️-project-structure)
+[📖 Overview](#-overview) · [🗃️ Dataset](#️-dataset) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🖥️ Screenshots](#️-screenshots) · [🚀 Quick Start](#-quick-start) · [🗂️ Project Structure](#️-project-structure)
 
 </div>
 
@@ -45,6 +45,49 @@ This project is a fully productionized ML system covering the entire lifecycle: 
 | Who should we prioritize? | 4-tier risk segmentation with recommended actions |
 | Is the model still reliable? | Evidently AI drift monitoring |
 | How do we integrate this into our systems? | Production-ready FastAPI with batch endpoint |
+
+---
+
+## 🗃️ Dataset
+
+This project uses the **Retail Intelligence: Customer Churn Dataset** publicly available on Kaggle.
+
+<div align="center">
+
+[![Kaggle Dataset](https://img.shields.io/badge/Kaggle-Retail_Intelligence:_Customer_Churn_Dataset-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/noopurbhatt/retail-intelligence-customer-churn-dataset)
+
+</div>
+
+| Property | Details |
+|---|---|
+| **Source** | Kaggle — `noopurbhatt/retail-intelligence-customer-churn-dataset` |
+| **Records** | 100,000+ retail customers |
+| **Task** | Binary classification (Churn / Not Churn) |
+| **Domain** | Retail & E-commerce |
+
+### 📋 Feature Overview
+
+| Column | Description |
+|---|---|
+| `customer_id` | Unique customer identifier |
+| `age_group` | Customer age group |
+| `gender` | Customer gender |
+| `region` | Customer region |
+| `customer_segment` | Segment label (Loyal, New, Returning, VIP) |
+| `preferred_channel` | Preferred shopping channel |
+| `purchase_frequency` | Number of purchases in the period |
+| `avg_order_value` | Average transaction value |
+| `total_spent` | Total spending across all transactions |
+| `recency_days` | Days since last activity or purchase |
+| `website_visits` | Number of website visits |
+| `discount_usage_rate` | Rate of discount coupon usage |
+| `email_open_rate` | Email campaign engagement rate |
+| `cart_abandonment_rate` | Rate of cart abandonment events |
+| `loyalty_score` | Computed customer loyalty score |
+| `engagement_score` | Computed customer engagement score |
+| `churn_flag` | **Target variable** — 1 = Churned, 0 = Retained |
+
+> 📌 This dataset is used strictly for **learning and educational purposes**. Full credit goes to the original dataset author on Kaggle.
 
 ---
 
@@ -472,11 +515,20 @@ Based on the model and SHAP analysis, the top signals driving churn are **custom
 
 ---
 
-**Disclaimer**: 
-- This notebook is created solely for learning and exploration purposes. There is no intention to offend or harm any party. All content and analysis presented are based on publicly available data online. I undertake this process to enhance my understanding of data analysis techniques and methodologies and hone my skills in implementing relevant algorithms and models within the context of data science learning. In conducting this analysis, I strive to maintain objectivity and professionalism in interpreting the existing data. Any conclusions or recommendations provided result from personal analysis and are not intended as professional advice in any specific capacity. I hope the information obtained from this notebook can be useful to anyone reading it to learn and develop data analysis skills.
+## 📄 Disclaimer
 
-⭐ **If this project was helpful, consider giving it a star!** ⭐
+This project was built solely for **learning and skill development** purposes in the field of machine learning and MLOps. All analysis and conclusions are based on a publicly available dataset from Kaggle and are intended as a personal study exercise, not professional or commercial advice.
+
+Full dataset credit goes to the original author:
+**[Retail Intelligence: Customer Churn Dataset](https://www.kaggle.com/datasets/noopurbhatt/retail-intelligence-customer-churn-dataset)** by `noopurbhatt` on Kaggle.
 
 ---
+
+<div align="center">
+
+*Built as a portfolio project demonstrating production-grade ML engineering practices.*
+*Feedback, questions, and contributions are welcome.*
+
+⭐ **If this project was helpful, consider giving it a star!** ⭐
 
 </div>
