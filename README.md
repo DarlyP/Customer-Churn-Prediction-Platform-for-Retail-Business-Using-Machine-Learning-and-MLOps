@@ -24,7 +24,23 @@
 
 <br/>
 
-[📖 Overview](#-overview) · [🗃️ Dataset](#️-dataset) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🖥️ Screenshots](#️-screenshots) · [🚀 Quick Start](#-quick-start) · [🗂️ Project Structure](#️-project-structure)
+[🚀 Live Demo](#-live-demo) · [📖 Overview](#-overview) · [🗃️ Dataset](#️-dataset) · [🏗️ Architecture](#️-architecture) · [📊 Model Performance](#-model-performance) · [🖥️ Screenshots](#️-screenshots) · [⚡ Quick Start](#-quick-start) · [🗂️ Project Structure](#️-project-structure)
+
+</div>
+
+---
+
+## 🚀 Live Demo
+
+> Try the full interactive dashboard — no installation required.
+
+<div align="center">
+
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Live%20Demo-FFD21E?style=for-the-badge)](https://huggingface.co/spaces/darly9991/Customer-Churn-Prediction-Platform-for-Retail-Business)
+
+**[👉 Open Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/darly9991/Customer-Churn-Prediction-Platform-for-Retail-Business)**
+
+*Explore customer segmentation, run real-time churn predictions, and view drift monitoring reports — all directly in your browser.*
 
 </div>
 
@@ -356,9 +372,15 @@ When running via Docker Compose, three services are available simultaneously:
 
 ---
 
-## 🚀 Quick Start
+## ⚡ Quick Start
 
-### Option A — Docker Compose (Recommended)
+### 🤗 Option A — Hugging Face Spaces (No Setup Required)
+
+Try the live dashboard instantly — no installation, no Docker, no local setup:
+
+**[👉 Launch on Hugging Face Spaces](https://huggingface.co/spaces/darly9991/Customer-Churn-Prediction-Platform-for-Retail-Business)**
+
+### Option B — Docker Compose (Recommended for Local)
 
 Spin up all services with a single command:
 
@@ -368,7 +390,7 @@ cd Customer-Churn-Prediction-Platform-for-Retail-Business-Using-Machine-Learning
 docker compose up --build
 ```
 
-### Option B — Local Setup
+### Option C — Local Setup
 
 ```bash
 # 1. Clone and enter the project
